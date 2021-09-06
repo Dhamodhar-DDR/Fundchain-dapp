@@ -1,5 +1,5 @@
 <!-- PROJECT LOGO -->
-<h1> Fundchain : <small>A conditional fund raising platform<small></h1>
+<h1> Fundchain-dapp : <small>A conditional fund raising platform<small></h1>
 
 A decentralized fundraising application using Tezos technology with its own consensus protocol. It can be used to donate and raise funds and also 'conditionally' funds. It also contains its own consensus algorithm (halfway implemented due to time constraint) which is similar to proof-of-stake, which is being designed to verify the fundraising organizations/individuals. These are elaborated in the upcoming sections.
 
@@ -202,3 +202,8 @@ To actually try out our DApp, there are certain requirements to set up, which in
 
 
 * <a href="https://github.com/othneildrew/Best-README-Template"> README template </a>
+
+
+## Project Demo Pictures
+
+You can refer the sample shots our project [here](https://github.com/Dhamodhar-DDR/Fundchain-dapp/tree/main/images)
