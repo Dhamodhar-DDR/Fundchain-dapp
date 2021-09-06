@@ -16,6 +16,7 @@ A decentralized fundraising application using Tezos technology with its own cons
   </p>
 </p>
 
+NOTE : This repository is a built up version of our [original repository](https://github.com/GSri30/Fundchain)
 
 
 <!-- TABLE OF CONTENTS -->
