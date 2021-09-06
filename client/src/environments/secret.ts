@@ -1,0 +1,5 @@
+export const secret={
+  API_KEY:"599607cf-2d58-4596-b147-3d777819c40a",
+  CONTAINER_ID:"0baab33a-7690-466b-978f-5ddbc7bf8612",
+  COIN_LAYER: "f9775789f9a8df7836e241412deec385",
+}

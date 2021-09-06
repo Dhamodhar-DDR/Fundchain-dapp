@@ -1,0 +1,31 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "importHelpers": true,
+    "module": "es2020",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "plugins": [
+      { "name": "tslint-language-service"}
+    ],
+    "paths": {
+      "path": [ "/node_modules/path-browserify" ], 
+      "os":[ "/node_modules/os-browserify" ], 
+      "https":[ "/node_modules/https-browserify" ], 
+      "stream":[ "/node_modules/stream-browserify" ], 
+      "http":[ "/node_modules/stream-http" ], 
+      "crypto":[ "/node_modules/crypto-browserify" ] 
+    }
+  }
+}
