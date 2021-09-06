@@ -5,6 +5,7 @@ import { TaquitoService } from './../../taquito.service'
 import {IpfsComponent} from '../ipfs/ipfs.component'
 
 import { Base64 } from 'js-base64';
+import { secret } from '../../../environments/secret';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
