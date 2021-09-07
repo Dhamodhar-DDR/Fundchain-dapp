@@ -169,6 +169,10 @@ Clone the repo
    ```sh
    git clone https://github.com/Dhamodhar-DDR/Fundchain-dapp
    ```
+Go to client folder
+   ```sh
+   cd client
+   ```
 Install NPM packages
    ```sh
    npm install
