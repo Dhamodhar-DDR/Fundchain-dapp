@@ -167,7 +167,7 @@ To install node@12.22.1
    ```
 Clone the repo
    ```sh
-   git clone https://github.com/GSri30/Fundchain
+   git clone https://github.com/Dhamodhar-DDR/Fundchain-dapp
    ```
 Install NPM packages
    ```sh
