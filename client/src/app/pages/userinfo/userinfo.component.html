@@ -129,7 +129,7 @@
                             <ngx-fs-icon-ui [kind]="row.data.kind " [expanded]="row.expanded "></ngx-fs-icon-ui>
                             {{row.data[customColumn]}}
                             <ng-container *ngIf=isDir(row.data.kind)>
-                                <a href="/main/viewpost/{{row.data.puid}}"><nb-icon icon="link-2-outline"></nb-icon></a>
+                                <nb-icon style="cursor: pointer" (click) = "link_to_post(row.data.puid)" icon="link-2-outline"></nb-icon>
                             </ng-container>
                         </div>
                         <div style="margin-left: 50%; ">
