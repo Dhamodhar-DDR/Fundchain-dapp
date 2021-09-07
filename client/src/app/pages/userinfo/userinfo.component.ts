@@ -1,6 +1,7 @@
 import { RefundDialogComponent } from './refund-dialog/refund-dialog.component';
 import { UserinfoService } from "./userinfo.service";
 import { Base64 } from 'js-base64';
+import { Router } from '@angular/router';
 
 import {
   Component,
@@ -101,6 +102,7 @@ export class UserinfoComponent implements OnInit, OnDestroy {
     private taquito: TaquitoService,
     private iconsLibrary: NbIconLibraries,
     private dialogService: NbDialogService,
+    private router : Router,
 
   )
   {
@@ -266,6 +268,9 @@ export class UserinfoComponent implements OnInit, OnDestroy {
         content : content
       },
     })
+  }
+  link_to_post(post_id){
+    this.router.navigate(['/main/viewpost/'+post_id]);
   }
 }
 
