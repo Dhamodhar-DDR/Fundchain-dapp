@@ -8,7 +8,7 @@ A decentralized fundraising application using Tezos technology with its own cons
 <p align="center">
     <img src="assets/fundchain-bg1.jpg" width="60%">
   <p align="center">
-    <a href="https://fundchain.netlify.app/">View Demo</a>
+    <a href="https://fundchain-dapp.netlify.app/">View Demo</a>
     ·
     <a href="https://github.com/GSri30/Fundchain/issues">Report Bug</a>
     ·
