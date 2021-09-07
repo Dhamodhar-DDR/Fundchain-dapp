@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit,CanActivate {
         this.uuid=encode(this.email,true);
         // const uuid_decode=decode(uuid);
         this.name=(this.userPayload['customFieldInputValues']['Nickname']!='' ?this.userPayload['customFieldInputValues']['Nickname']:"Anonymous");
-        this.profile_pic_number=this.name.length%7;
+        // this.profile_pic_number=this.name.length%7;
         // this.appservice.name.next(this.name);
         // this.appservice.email.next(this.email);
         // this.appservice.uuid.next(this.uuid);
@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit,CanActivate {
         sessionStorage.setItem("isLoggedin", "true");
         sessionStorage.setItem("email", this.email);
         sessionStorage.setItem("uuid", this.uuid);
-        sessionStorage.setItem("profilepicid",this.profile_pic_number.toString());
+        // sessionStorage.setItem("profilepicid",this.profile_pic_number.toString());
         this.isLoader = true;
         //this.cds.detectChanges();
         await this.taquito.set_contract();
@@ -95,6 +95,15 @@ export class LoginComponent implements OnInit,CanActivate {
           await this.taquito.add_new_user(this.email);
         }
         if(this.isLoggedIn){
+          const xp=await this.taquito.get_uxp(this.uuid);
+          const XP=[0,5,50,500,5000,50000,500000,5000000];
+          this.profile_pic_number=0;
+          for (let i=0;i<8;i++){
+            if(xp>=XP[i]){
+              this.profile_pic_number=i+1;
+            }
+          }
+          sessionStorage.setItem("profilepicid",this.profile_pic_number.toString());
           this.isLoader = false;
           //this.cds.detectChanges();
           this.router.navigate(['/main']);
