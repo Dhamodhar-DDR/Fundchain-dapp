@@ -91,7 +91,9 @@ export class TaquitoService {
                 tlist.push({data : {
                     Type : this.storage.posts.get(val.to_puid).name,
                     Amount : (Math.floor(val.amount.c[0]/100000)/10).toString(),
-                    kind : 'doc'
+                    kind : 'doc',
+                    puid : val.to_puid,
+                    transid : val.transid
                     }});
             });
             i+=1;
