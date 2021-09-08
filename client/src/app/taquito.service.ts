@@ -347,7 +347,7 @@ export class TaquitoService {
         var email = atob(uuid);
         const puid = Base64.encode(email+ len.toString(),true);
         // console.log(typeof(images));
-        console.log(deadline);
+        
         const op = await this.contract.methods
         .add_post(userAddress,deadline,description,goal,institution,name,images,post_type,puid,uuid)
         .send();
@@ -457,7 +457,11 @@ export class TaquitoService {
             {
                 if(val.type == 1) flag = 2;
                 else{
-                    if(posts[val.to_puid].deadline < curr_date)
+                    var d1 = new Date(posts[val.to_puid].deadline);
+                    var d2 = new Date(curr_date)
+                    var dt1 = d1.getTime()/1000;
+                    var dt2 = d2.getTime()/1000;
+                    if(dt1 <= dt2)
                     {
                         if(posts[val.to_puid].downvotes.length < val.downvotes)
                         {
