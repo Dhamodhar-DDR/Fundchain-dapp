@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ngx-status-card',
@@ -13,15 +13,21 @@ import { Component, Input } from '@angular/core';
 
       <div class="details">
         <div class="title h5">{{ title }}</div>
-        <div class="status paragraph-2">{{ count }}</div>
+        <div class="status paragraph-2">{{ count | lowercase}}</div>
       </div>
     </nb-card>
   `,
 })
-export class StatusCardComponent {
+export class StatusCardComponent implements OnInit{
 
   @Input() title: string;
   @Input() type: string;
   @Input() on = true;
-  @Input() count:number;
+  @Input() count:string;
+
+  ngOnInit()
+  {
+    this.count.toLowerCase();
+
+  }
 }

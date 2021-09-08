@@ -10,7 +10,7 @@ interface CardSettings {
   title: string;
   iconClass: string;
   type: string;
-  count: number;
+  count: string;
 }
 
 class Organization{
@@ -34,25 +34,25 @@ export class DashboardComponent implements OnDestroy {
     title: 'Total Funds Raised',
     iconClass: 'nb-lightbulb',
     type: 'primary',
-    count: 0,
+    count: "",
   };
   ContributorsCard: CardSettings = {
     title: 'Total Funders',
     iconClass: 'nb-plus-circled',
     type: 'info',
-    count: 0,
+    count: "",
   };
   GoalsReachedCard: CardSettings = {
     title: 'Total Goals Reached',
     iconClass: 'nb-checkmark-circle',
     type: 'success',
-    count: 0,
+    count: "",
   };
   RecipientsCard: CardSettings = {
     title: 'Total Beneficiaries',
     iconClass: 'nb-person',
     type: 'warning',
-    count: 0,
+    count: "",
   };
 
   orgs : Organization[] = [
@@ -121,10 +121,11 @@ export class DashboardComponent implements OnDestroy {
 
   async ngOnInit(){
     await this.taquito.set_contract();
-    this.RecipientsCard.count = await this.taquito.get_number_posts();
-    this.GoalsReachedCard.count = await this.taquito.get_goals_reached();
-    this.ContributorsCard.count = await this.taquito.get_total_donors();
-    this.FundsReceivedCard.count = await this.taquito.get_total_fund();
+    this.RecipientsCard.count = await (await this.taquito.get_number_posts()).toString();
+    this.GoalsReachedCard.count = await (await this.taquito.get_goals_reached()).toString();
+    this.ContributorsCard.count = await (await this.taquito.get_total_donors()).toString();
+    var count = await (await this.taquito.get_total_fund()).toString();
+    this.FundsReceivedCard.count = count + " tez"
     var post_list = await this.taquito.get_all_posts();
     let i =0;
     while(i<post_list.length)
