@@ -12,7 +12,7 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { UserinfoModule } from './userinfo/userinfo.module';
 import { NgModule } from '@angular/core';
-import { NbMenuModule, NbCardModule, NbIconModule, NbButtonModule, NbInputModule, NbDialogModule, NbSelectModule } from '@nebular/theme';
+import { NbMenuModule, NbCardModule, NbIconModule, NbButtonModule, NbInputModule, NbDialogModule, NbSelectModule, NbTagModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -50,6 +50,7 @@ import { UserinfoService } from './userinfo/userinfo.service';
     AddorgModule,
     NgxQRCodeModule,
     NbInputModule,
+    NbTagModule,
     NbDialogModule.forChild(),
     EducationModule,
     StartupModule,

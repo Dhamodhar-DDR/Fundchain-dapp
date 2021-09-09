@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NbDialogRef } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-profileinfo-dialog',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileinfoDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ref: NbDialogRef<ProfileinfoDialogComponent>) { }
 
   ngOnInit(): void {
+  }
+
+  close()
+  {
+    this.ref.close();
   }
 
 }

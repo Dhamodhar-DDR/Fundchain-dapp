@@ -225,7 +225,8 @@ export class ViewpostComponent implements OnInit{
           puid: this.puid as string,
           amount: Math.floor(parseFloat(amount.substring(0,amount.length-4))*1000000) as number,
           comment: comment,
-        }
+        },
+        closeOnBackdropClick: false,
       })
   }
 

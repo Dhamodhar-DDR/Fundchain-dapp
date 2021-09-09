@@ -12,7 +12,7 @@ import {
   NbIconModule,
 
 } from '@nebular/theme';
-import { NbInputModule, NbTreeGridModule } from '@nebular/theme';
+import { NbInputModule, NbTreeGridModule, NbTagModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -34,6 +34,7 @@ import { ProfileinfoDialogComponent } from './profileinfo-dialog/profileinfo-dia
     NbActionsModule,
     NbRadioModule,
     NbSelectModule,
+    NbTagModule,
     NbListModule,
     NbIconModule,
     NgxEchartsModule,

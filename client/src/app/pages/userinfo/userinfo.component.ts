@@ -1,3 +1,4 @@
+import { ProfileinfoDialogComponent } from './profileinfo-dialog/profileinfo-dialog.component';
 import { RefundDialogComponent } from './refund-dialog/refund-dialog.component';
 import { UserinfoService } from "./userinfo.service";
 import { Base64 } from 'js-base64';
@@ -243,6 +244,13 @@ export class UserinfoComponent implements OnInit, OnDestroy {
       },
     })
   }
+
+  Open()
+  {
+    this.dialogService.open(ProfileinfoDialogComponent);
+
+  }
+
   async Reclaim(puid,trans_id){
     await this.taquito.set_contract();
     var x = await this.taquito.check_reclaim(Base64.encode(sessionStorage.getItem('email'),true),trans_id);
