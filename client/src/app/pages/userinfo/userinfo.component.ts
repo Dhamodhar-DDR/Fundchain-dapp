@@ -220,7 +220,7 @@ export class UserinfoComponent implements OnInit, OnDestroy {
 
   async Claim(puid,trans_id){
     await this.taquito.set_contract();
-    var x = await this.taquito.check_claim(Base64.encode(sessionStorage.getItem('email'),true),trans_id);
+    var x = await this.taquito.check_claim(puid,trans_id);
     console.log(x);
     var content : string;
     if(x == 0){
