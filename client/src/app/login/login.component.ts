@@ -7,7 +7,7 @@ import { AppService } from './../app.service';
 import { Component, OnInit} from '@angular/core';
 import Sawo from "sawo";
 import {secret} from "../../environments/secret";
-import { encode, decode } from 'js-base64';
+import { encode, decode, Base64 } from 'js-base64';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 
 import { TaquitoService } from '../taquito.service';
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit,CanActivate {
         this.userPayload = payload;
         this.isLoggedIn = true;
         this.email=this.userPayload['identifier'];
-        this.uuid=encode(this.email,true);
+        this.uuid= Base64.encode(this.email,true);
         // const uuid_decode=decode(uuid);
         this.name=(this.userPayload['customFieldInputValues']['Nickname']!='' ?this.userPayload['customFieldInputValues']['Nickname']:"Anonymous");
         // this.profile_pic_number=this.name.length%7;
@@ -93,17 +93,22 @@ export class LoginComponent implements OnInit,CanActivate {
         {
           await this.taquito.connect_wallet();
           await this.taquito.add_new_user(this.email);
+          this.profile_pic_number = 0;
+          sessionStorage.setItem("profilepicid",this.profile_pic_number.toString());
         }
         if(this.isLoggedIn){
-          const xp=await this.taquito.get_uxp(this.uuid);
-          const XP=[0,5,50,500,5000,50000,500000,5000000];
-          this.profile_pic_number=0;
-          for (let i=0;i<8;i++){
-            if(xp>=XP[i]){
-              this.profile_pic_number=i+1;
+          if(!x)
+          {
+            const xp= await this.taquito.get_uxp(this.uuid);
+            const XP=[0,5,50,500,5000,50000,500000,5000000];
+            this.profile_pic_number=0;
+            for (let i=0;i<8;i++){
+              if(xp>=XP[i]){
+                this.profile_pic_number=i+1;
+              }
             }
+            sessionStorage.setItem("profilepicid",this.profile_pic_number.toString());
           }
-          sessionStorage.setItem("profilepicid",this.profile_pic_number.toString());
           this.isLoader = false;
           //this.cds.detectChanges();
           this.router.navigate(['/main']);
