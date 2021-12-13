@@ -10,9 +10,9 @@ import { Base64 } from 'js-base64';
   providedIn: 'root',
 })
 export class TaquitoService {
-    private taquito: TezosToolkit = new TezosToolkit('https://florencenet.smartpy.io/');
+    private taquito: TezosToolkit = new TezosToolkit('https://hangzhounet.smartpy.io/');
     private wallet;
-    private contract_address = "KT1VoXdrw4kfzYaoEyEbcxEm25DaDXxaH5xf";
+    private contract_address = "KT1QEQECCk1DGxuWrsE8LQLxbY3mdcRh2CDJ";
     private storage = undefined;
     private contract = undefined;
     constructor() {}
@@ -27,7 +27,7 @@ export class TaquitoService {
         this.wallet = new BeaconWallet({ name: 'test' });
         await this.wallet.requestPermissions({
             network: {
-                type: NetworkType.FLORENCENET
+                type: NetworkType.HANGZHOUNET
             }
         });
         this.taquito.setProvider({ wallet: this.wallet });
