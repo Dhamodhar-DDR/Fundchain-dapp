@@ -30,7 +30,7 @@
         "postinstall": "ngcc --properties es2015 es5 browser module main --first-only --create-ivy-entry-points --tsconfig \"./src/tsconfig.app.json\""
     },
     "dependencies": {
-        "@airgap/beacon-sdk": "^2.3.1",
+        "@airgap/beacon-sdk": "^2.3.8",
         "@akveo/ng2-completer": "^9.0.1",
         "@angular/animations": "^12.1.0",
         "@angular/cdk": "12.1.0",
@@ -49,9 +49,10 @@
         "@nebular/theme": "8.0.0",
         "@swimlane/ngx-charts": "^14.0.0",
         "@taquito/beacon-wallet": "^10.1.0",
-        "@taquito/taquito": "^10.1.0",
+        "@taquito/taquito": "^10.2.1",
         "@techiediaries/ngx-qrcode": "^9.1.0",
         "angular2-chartjs": "0.4.1",
+        "beacons": "0.0.1",
         "bootstrap": "4.3.1",
         "chart.js": "2.7.1",
         "ckeditor": "4.7.3",
