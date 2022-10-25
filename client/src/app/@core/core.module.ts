@@ -38,10 +38,10 @@ import { SmartTableService } from './mock/smart-table.service';
 import { UserActivityService } from './mock/user-activity.service';
 import { OrdersChartService } from './mock/orders-chart.service';
 import { ProfitChartService } from './mock/profit-chart.service';
-import { TrafficListService } from './mock/traffic-list.service';
+// import { TrafficListService } from './mock/traffic-list.service';
 import { EarningService } from './mock/earning.service';
 import { OrdersProfitChartService } from './mock/orders-profit-chart.service';
-import { TrafficBarService } from './mock/traffic-bar.service';
+// import { TrafficBarService } from './mock/traffic-bar.service';
 import { ProfitBarAnimationChartService } from './mock/profit-bar-animation-chart.service';
 import { TemperatureHumidityService } from './mock/temperature-humidity.service';
 import { SolarService } from './mock/solar.service';
@@ -78,10 +78,10 @@ const DATA_SERVICES = [
   { provide: UserActivityData, useClass: UserActivityService },
   { provide: OrdersChartData, useClass: OrdersChartService },
   { provide: ProfitChartData, useClass: ProfitChartService },
-  { provide: TrafficListData, useClass: TrafficListService },
+  // { provide: TrafficListData, useClass: TrafficListService },
   { provide: EarningData, useClass: EarningService },
   { provide: OrdersProfitChartData, useClass: OrdersProfitChartService },
-  { provide: TrafficBarData, useClass: TrafficBarService },
+  // { provide: TrafficBarData, useClass: TrafficBarService },
   { provide: ProfitBarAnimationChartData, useClass: ProfitBarAnimationChartService },
   { provide: TemperatureHumidityData, useClass: TemperatureHumidityService },
   { provide: SolarData, useClass: SolarService },
