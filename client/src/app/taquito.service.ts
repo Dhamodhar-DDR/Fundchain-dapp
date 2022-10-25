@@ -10,27 +10,30 @@ import { Base64 } from 'js-base64';
   providedIn: 'root',
 })
 export class TaquitoService {
-    private taquito: TezosToolkit = new TezosToolkit('https://florencenet.smartpy.io/');
+    private taquito: TezosToolkit = new TezosToolkit('https://hangzhounet.smartpy.io/');
     private wallet;
-    private contract_address = "KT1VoXdrw4kfzYaoEyEbcxEm25DaDXxaH5xf";
+    private contract_address = "KT1QEQECCk1DGxuWrsE8LQLxbY3mdcRh2CDJ";
     private storage = undefined;
     private contract = undefined;
     constructor() {}
-
+    
     public async set_contract() {
-        this.contract = await this.taquito.wallet.at(this.contract_address);
-        this.storage = await this.contract.storage();
+        // if(this.storage == undefined) 
+        // {
+            this.contract = await this.taquito.wallet.at(this.contract_address);
+            this.storage = await this.contract.storage();
+        // }
     }
-
+    
 
     public async connect_wallet() {
         this.wallet = new BeaconWallet({ name: 'test' });
         await this.wallet.requestPermissions({
-            network: {
-                type: NetworkType.FLORENCENET
+            network: {  
+                type: NetworkType.HANGZHOUNET
             }
         });
-        this.taquito.setProvider({ wallet: this.wallet });
+        this.taquito.setProvider({ wallet: this.wallet });    
         return true;
     }
 
@@ -60,7 +63,7 @@ export class TaquitoService {
         return pics;
     }
 
-    public async get_specific_from_transactions(uuid):Promise<Array<object>> {
+    public async get_specific_from_transactions(uuid):Promise<Array<object>> {        
         if(this.storage == undefined)this.storage = await this.contract.storage();
         var tlist:{}[] = [];
         var i = 1;
@@ -111,7 +114,7 @@ export class TaquitoService {
         });
         return tlist;
     }
-
+    
     public async get_all_transactions():Promise<object> {
         if(this.storage == undefined)this.storage = await this.contract.storage();
         const transactions_list: { uuid: string; transaction: number }[] = [];
@@ -127,10 +130,10 @@ export class TaquitoService {
     {
         var month_list:any = [450,23,190,100,190,300,100,990,100,200,500,90];
         var curr_date = new Date();
-        const curr_month = curr_date.getMonth() + 1;
+        const curr_month = curr_date.getMonth() + 1;    
         const curr_year = curr_date.getFullYear();
-
-
+        
+        
         if(this.storage == undefined)this.storage = await this.contract.storage();
         this.storage.transactions.forEach((val: any, key: string) => {
             val.forEach(element => {
@@ -167,6 +170,7 @@ export class TaquitoService {
     // get post
     public async get_post(puid):Promise<object>{
         if(this.storage == undefined)this.storage = await this.contract.storage();
+        // console.log(this.storage.posts.get(puid));
         return this.storage.posts.get(puid);
     }
 
@@ -227,7 +231,7 @@ export class TaquitoService {
         // console.log(this.storage.total_goals_reached.c);
         return this.storage.total_goals_reached.c;
     }
-
+    
     //get number of posts
     public async get_number_posts():Promise<number>{
         if(this.storage == undefined)this.storage = await this.contract.storage();
@@ -257,7 +261,7 @@ export class TaquitoService {
         // console.log(posts);
         return posts;
     }
-
+    
     public async get_all_posts():Promise<Array<Object>> {
         if(this.storage == undefined)this.storage = await this.contract.storage();
         const post_list: { name: string; id: string, puid : string,type: string, description : string }[] = [];
@@ -280,7 +284,7 @@ export class TaquitoService {
         // console.log(this.storage.users.size);
         return this.storage.users.size;
     }
-
+    
     async check_new_user(email):Promise<Boolean>{
         if(this.storage == undefined)this.storage = await this.contract.storage();
         if(this.storage.users.get(Base64.encode(email,true))) return false;
@@ -316,7 +320,7 @@ export class TaquitoService {
     public async send_fund_to_contract(from_uuid, to_puid,send_amount,comment, downvotes) {
         const userAddress = await this.wallet.getPKH();
         let flag = true
-
+        
         if(this.storage == undefined)this.storage = await this.contract.storage();
         const len = this.storage.transactions.get(to_puid).length + 1;
         const trans_id = to_puid + parseInt(len);
@@ -337,13 +341,13 @@ export class TaquitoService {
     public async add_new_post(name,description,institution,post_type,uuid,goal,images,deadline) {
         const userAddress = await this.wallet.getPKH();
         if(this.storage == undefined) this.storage = this.contract.storage();
-
+        
         const len = await this.storage.users.get(uuid).posts.length;
         const posts = await this.storage.users.get(uuid);
         var email = atob(uuid);
         const puid = Base64.encode(email+ len.toString(),true);
         // console.log(typeof(images));
-
+        
         const op = await this.contract.methods
         .add_post(userAddress,deadline,description,goal,institution,name,images,post_type,puid,uuid)
         .send();
@@ -375,7 +379,7 @@ export class TaquitoService {
             .support(puid,uuid)
             .send();
             await op.confirmation();
-        }
+        } 
     }
     public async report(uuid,puid){
         const flag = await this.check_support(uuid,puid);
@@ -385,11 +389,11 @@ export class TaquitoService {
             .report(puid,uuid)
             .send();
             await op.confirmation();
-        }
+        } 
     }
-
+    
     // Check Reclaim
-    // 0 : This fund can be reclaimed.
+    // 0 : This fund can be reclaimed.    
     // 1 : This fund is not mature. Please wait until the deadline of the cause!
     // 2 : This fund was already sent to the organization.
     // 3 : Transaction not found.
@@ -400,20 +404,20 @@ export class TaquitoService {
         await this.storage.posts.forEach((val: any, key: string) => {
             posts[key] = val;
         });
-
+        
         var curr_date = new Date();
-        if(this.storage == undefined) this.storage = this.contract.storage();
+        if(this.storage == undefined) this.storage = this.contract.storage();        
         var flag = 3;
-
+        
         await this.storage.transactions.get(uuid).forEach((val: any, key: string) => {
             if(val.transid == transid)
-            {
+            {   
                 if(val.type.c[0] == 1) flag = 4;
                 else{
                     console.log(posts[val.to_puid].deadline);
                     console.log(posts[val.to_puid].deadline <=  curr_date);
                     if(posts[val.to_puid].deadline <=  curr_date.getDate())
-                    {
+                    {   
                         if(posts[val.to_puid].downvotes.length >= val.downvotes)
                         {
                             if(val.claimable == 1) flag = 0;
@@ -431,9 +435,9 @@ export class TaquitoService {
         });
         return flag;
     }
-
+    
     // Check Claim
-    // 0 : This fund can be claimed.
+    // 0 : This fund can be claimed.    
     // 1 : This fund is not mature. Please wait until the deadline of the cause!
     // 2 : This fund cannot be claimed as the donor set a low downvote threshold.
     // 3 : Transaction not found.
@@ -444,9 +448,9 @@ export class TaquitoService {
         await this.storage.posts.forEach((val: any, key: string) => {
             posts[key] = val;
         });
-
+        
         var curr_date = new Date();
-        if(this.storage == undefined) this.storage = this.contract.storage();
+        if(this.storage == undefined) this.storage = this.contract.storage();        
         var flag = 3;
         await this.storage.transactions.get(puid).forEach((val: any, key: string) => {
             if(val.transid == transid)
@@ -505,7 +509,7 @@ export class TaquitoService {
         let activeAccount;
         if(this.wallet) activeAccount = await this.wallet.client.getActiveAccount();
         else return false;
-        if(activeAccount)
+        if(activeAccount) 
         {
             console.log(activeAccount.address);
             return true;
@@ -515,7 +519,7 @@ export class TaquitoService {
 
     public async disconnect_wallet(){
         if(this.wallet)
-        {
+        {   
             this.wallet.client.destroy();
             this.wallet = undefined;
         }
