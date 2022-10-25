@@ -3,41 +3,36 @@ import smartpy as sp
 class FundChain(sp.Contract):
     def __init__(self):
         self.init(
-        users = sp.map(
-                            #uuid
-                            tkey=sp.TString,
-                            tvalue=sp.TRecord(
-                                    uuid=sp.TString,
-                                    datetime=sp.TTimestamp,
-                                    donated_mutez=sp.TMutez,
-                                    email = sp.TString,
-                                    posts= sp.TList(sp.TString),
-                                    org_xp = sp.TInt,
-                                    user_xp = sp.TInt,
-                                )
-                            ),
+        tkey=sp.TString,
+        tvalue=sp.TRecord(
+                uuid=sp.TString,
+                datetime=sp.TTimestamp,
+                donated_mutez=sp.TMutez,
+                email = sp.TString,
+                posts= sp.TList(sp.TString),
+                org_xp = sp.TInt,
+                user_xp = sp.TInt,
+            )
+        ),
         transactions=sp.map(
-                                #uuid or puid
-                                tkey=sp.TString,
-                                tvalue=sp.TList(
-                                    sp.TRecord(
-                                        transid = sp.TString,
-                                        type = sp.TNat,
-                                        from_uuid=sp.TString,
-                                        from_address=sp.TAddress,
-                                        to_puid=sp.TString,
-                                        to_address=sp.TAddress,
-                                        amount = sp.TMutez,
-                                        comment=sp.TString,
-                                        timestamp=sp.TTimestamp,
-                                        downvotes = sp.TNat,
-                                        claimable = sp.TNat
-                                        # verified = sp.TBool,
-                                    )
-                                )
-                            ),
+            tkey=sp.TString,
+            tvalue=sp.TList(
+                sp.TRecord(
+                    transid = sp.TString,
+                    type = sp.TNat,
+                    from_uuid=sp.TString,
+                    from_address=sp.TAddress,
+                    to_puid=sp.TString,
+                    to_address=sp.TAddress,
+                    amount = sp.TMutez,
+                    comment=sp.TString,
+                    timestamp=sp.TTimestamp,
+                    downvotes = sp.TNat,
+                    claimable = sp.TNat
+                )
+            )
+        ),
         posts=sp.map(
-                    # puid
                     tkey=sp.TString,
                     tvalue=sp.TRecord(
                         owner_uuid = sp.TString,
@@ -54,10 +49,7 @@ class FundChain(sp.Contract):
                         deadline = sp.TTimestamp,
                         locked_fund = sp.TMutez,
                         upvotes = sp.TList(sp.TString),
-                        downvotes =sp.TList(sp.TString),
-                        # supports=sp.TNat,
-                        # reports=sp.TNat,
-                        # verified=sp.TBool
+                        downvotes =sp.TList(sp.TString)
                     )
                 ),
         total_fund=sp.mutez(0),
@@ -125,10 +117,9 @@ class FundChain(sp.Contract):
             comment= params.comment,
             timestamp=sp.now,
             downvotes = 0,
-            claimable = 0,
-            # verified = True,
+            claimable = 0
         ))
-        # sp.send(self.data.posts[params.to_puid].address, params.amount, message = None)
+        
         sp.if self.data.users[params.from_uuid].donated_mutez == sp.mutez(0):
             self.data.total_donors += 1
 
