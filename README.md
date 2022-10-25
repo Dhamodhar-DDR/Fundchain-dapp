@@ -190,6 +190,7 @@ To actually try out our DApp, there are certain requirements to set up, which in
   * Use a standard Tezos faucet to get Testnet ꜩ (required to pay gas, which is required to register an email) [NOTE that this is only a one time spend for a given email]
     * Network : Flourence Testnet 
     * RPC :  https://florencenet.smartpy.io/
+    (The network might be depricated eventually. Check the latest RPC node and make changes accordingly)
     * Lambda View : KT1BbTmNHmJp2NnQyw5qsAExEYmYuUpR2HdX
   * Enjoy!
 
